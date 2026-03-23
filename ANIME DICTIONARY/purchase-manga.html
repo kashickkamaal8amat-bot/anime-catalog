@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<link rel="icon" href="favicon.png">
+
+<title>Purchase Manga</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Times New Roman', Times, serif;
+background:#0f0f1a;
+color:white;
+}
+
+header{
+background:#141428;
+padding:20px;
+text-align:center;
+}
+
+header h1{
+margin:0;
+color:#ff4c8b;
+}
+
+nav{
+background:#1c1c35;
+padding:10px;
+text-align:center;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:0 15px;
+font-weight:bold;
+}
+
+nav a:hover{
+color:#ff4c8b;
+}
+
+.container{
+padding:30px;
+display:grid;
+grid-template-columns:repeat(3,minmax(280px,320px));
+gap:20px;
+justify-content:center;
+}
+
+.card{
+background:#1c1c35;
+border-radius:10px;
+overflow:hidden;
+transition:.3s;
+display:flex;
+flex-direction:column;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card img{
+width:100%;
+height:275px;
+object-fit:auto;
+}
+
+.card-content{
+padding:15px;
+display:flex;
+flex-direction:column;
+}
+
+.card-content h2{
+margin:0 0 10px 0;
+color:#ff4c8b;
+}
+
+.card-content ul{
+padding-left:18px;
+line-height:1.6;
+}
+
+.price{
+color:#00ffcc;
+font-weight:bold;
+margin-top:5px;
+}
+
+.stock{
+color:#7CFC00;
+font-size:14px;
+margin-top:4px;
+}
+
+.qty{
+margin-top:10px;
+padding:5px;
+border-radius:5px;
+border:none;
+}
+
+.cart-btn{
+margin-top:12px;
+padding:10px;
+background:#ff4c8b;
+border:none;
+color:white;
+font-weight:bold;
+border-radius:6px;
+cursor:pointer;
+transition:.3s;
+}
+
+.cart-btn:hover{
+background:#ff2e73;
+transform:scale(1.05);
+}
+
+footer{
+background:#141428;
+text-align:center;
+padding:15px;
+margin-top:30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>PURCHASE MANGA</h1>
+<h4>Select your favourite manga</h4>
+
+</header>
+
+<nav>
+
+<a href="ANIMEDICTIONARY.html">Home</a>
+
+<a href="cart.html">Cart</a>
+
+<a href="About-ad.html">Support</a>
+
+</nav>
+
+
+<div class="container">
+
+
+<!-- Naruto -->
+<div class="card">
+<img src="naruto.jpeg">
+<div class="card-content">
+<h2>Naruto</h2>
+<ul>
+<li>Season : 1</li>
+<li>Edition : Special Edition</li>
+<li>Author : Masashi Kishimoto</li>
+<li>Volume : 1</li>
+</ul>
+<div class="price">₹499</div>
+<div class="stock">In Stock</div>
+<select class="qty" id="qty-naruto">
+<option>Qty 1</option>
+<option>Qty 2</option>
+<option>Qty 3</option>
+</select>
+
+<button class="cart-btn"
+onclick="addToCart('Naruto',499,'naruto.jpeg','Season 1','Special Edition','Masashi Kishimoto',1,document.getElementById('qty-naruto'))">
+Add to Cart 🛒
+</button>
+</div>
+</div>
+
+
+<!-- One Piece -->
+<div class="card">
+<img src="one piece.jpeg">
+<div class="card-content">
+<h2>One Piece</h2>
+<ul>
+<li>Season : East Blue</li>
+<li>Edition : Collector Edition</li>
+<li>Author : Eiichiro Oda</li>
+<li>Volume : 1</li>
+</ul>
+<div class="price">₹599</div>
+<div class="stock">In Stock</div>
+<select class="qty" id="qty-onepiece">
+<option>Qty 1</option>
+<option>Qty 2</option>
+<option>Qty 3</option>
+</select>
+
+<button class="cart-btn"
+onclick="addToCart('One Piece',599,'one piece.jpeg','East Blue','Collector Edition','Eiichiro Oda',1,document.getElementById('qty-onepiece'))">
+Add to Cart 🛒
+</button>
+</div>
+</div>
+
+
+<!-- Jujutsu Kaisen -->
+<div class="card">
+<img src="jjk.jpeg">
+<div class="card-content">
+<h2>Jujutsu Kaisen</h2>
+<ul>
+<li>Season : 2</li>
+<li>Edition : First Print</li>
+<li>Author : Gege Akutami</li>
+<li>Volume : 20</li>
+</ul>
+<div class="price">₹499</div>
+<div class="stock">Only 5 left</div>
+<select class="qty" id="qty-jjk">
+<option>Qty 1</option>
+<option>Qty 2</option>
+<option>Qty 3</option>
+</select>
+
+<button class="cart-btn"
+onclick="addToCart('Jujutsu Kaisen',499,'jjk.jpeg','Season 2','First Print','Gege Akutami',20,document.getElementById('qty-jjk'))">
+Add to Cart 🛒
+</button>
+</div>
+</div>
+
+
+<!-- Attack on Titan -->
+<div class="card">
+<img src="aot.jpeg">
+<div class="card-content">
+<h2>Attack on Titan</h2>
+<ul>
+<li>Season : Final</li>
+<li>Edition : Deluxe</li>
+<li>Author : Hajime Isayama</li>
+<li>Volume : 34</li>
+</ul>
+<div class="price">₹699</div>
+<div class="stock">In Stock</div>
+<select class="qty" id="qty-aot">
+<option>Qty 1</option>
+<option>Qty 2</option>
+<option>Qty 3</option>
+</select>
+
+<button class="cart-btn"
+onclick="addToCart('Attack on Titan',699,'aot.jpeg','Final Season','Deluxe','Hajime Isayama',34,document.getElementById('qty-aot'))">
+Add to Cart 🛒
+</button>
+</div>
+</div>
+
+
+<!-- Demon Slayer -->
+<div class="card">
+<img src="Demon slayer.jpg">
+<div class="card-content">
+<h2>Demon Slayer</h2>
+<ul>
+<li>Season : Entertainment Arc</li>
+<li>Edition : Premium</li>
+<li>Author : Koyoharu Gotouge</li>
+<li>Volume : 23</li>
+</ul>
+<div class="price">₹549</div>
+<div class="stock">In Stock</div>
+<select class="qty" id="qty-demonslayer">
+<option>Qty 1</option>
+<option>Qty 2</option>
+<option>Qty 3</option>
+</select>
+
+<button class="cart-btn"
+onclick="addToCart('Demon Slayer',549,'Demon slayer.jpg','Entertainment Arc','Premium','Koyoharu Gotouge',23,document.getElementById('qty-demonslayer'))">
+Add to Cart 🛒
+</button>
+</div>
+</div>
+
+
+<!-- Dragon Ball -->
+<div class="card">
+<img src="dbz.jpg">
+<div class="card-content">
+<h2>Dragon Ball</h2>
+<ul>
+<li>Season : Z</li>
+<li>Edition : Classic</li>
+<li>Author : Akira Toriyama</li>
+<li>Volume : 10</li>
+</ul>
+<div class="price">₹450</div>
+<div class="stock">In Stock</div>
+<select class="qty" id="qty-dragonball">
+<option>Qty 1</option>
+<option>Qty 2</option>
+<option>Qty 3</option>
+</select>
+
+<button class="cart-btn"
+onclick="addToCart('Dragon Ball',450,'dbz.jpg','DBZ','Classic','Akira Toriyama',10,document.getElementById('qty-dragonball'))">
+Add to Cart 🛒
+</button>
+</div>
+</div>
+
+
+<!-- Death Note -->
+<div class="card">
+<img src="death note.jpg">
+<div class="card-content">
+<h2>Death Note</h2>
+<ul>
+<li>Season : Complete</li>
+<li>Edition : Black Edition</li>
+<li>Author : Tsugumi Ohba</li>
+<li>Volume : 12</li>
+</ul>
+<div class="price">₹650</div>
+<div class="stock">Only 3 left</div>
+<select class="qty" id="qty-deathnote">
+<option>Qty 1</option>
+<option>Qty 2</option>
+<option>Qty 3</option>
+</select>
+
+<button class="cart-btn"
+onclick="addToCart('Death Note',650,'death note.jpg','Complete','Black Edition','Tsugumi Ohba',12,document.getElementById('qty-deathnote'))">
+Add to Cart 🛒
+</button>
+</div>
+</div>
+
+
+<!-- Tokyo Revengers -->
+<div class="card">
+<img src="tokyo-revengers-manga-final-volume-scaled.jpg">
+<div class="card-content">
+<h2>Tokyo Revengers</h2>
+<ul>
+<li>Season : 1</li>
+<li>Edition : Special</li>
+<li>Author : Ken Wakui</li>
+<li>Volume : 31</li>
+</ul>
+<div class="price">₹520</div>
+<div class="stock">In Stock</div>
+<select class="qty" id="qty-tokyorevengers">
+<option>Qty 1</option>
+<option>Qty 2</option>
+<option>Qty 3</option>
+</select>
+
+<button class="cart-btn"
+onclick="addToCart('Tokyo Revengers',520,'tokyo-revengers-manga-final-volume-scaled.jpg','Season 1','Special','Ken Wakui',31,document.getElementById('qty-tokyorevengers'))">
+Add to Cart 🛒
+</button>
+</div>
+</div>
+
+
+<!-- Bleach -->
+<div class="card">
+<img src="Bleach-Manga-Cover-683x1024.jpg">
+<div class="card-content">
+<h2>Bleach</h2>
+<ul>
+<li>Season : Thousand Year Blood War</li>
+<li>Edition : Deluxe</li>
+<li>Author : Tite Kubo</li>
+<li>Volume : 74</li>
+</ul>
+<div class="price">₹799</div>
+<div class="stock">In Stock</div>
+<select class="qty" id="qty-bleach">
+<option>Qty 1</option>
+<option>Qty 2</option>
+<option>Qty 3</option>
+</select>
+
+<button class="cart-btn"
+onclick="addToCart('Bleach',799,'Bleach-Manga-Cover-683x1024.jpg','TYBW','Deluxe','Tite Kubo',74,document.getElementById('qty-bleach'))">
+Add to Cart 🛒
+</button>
+</div>
+</div>
+
+
+
+
+</div>
+
+
+<footer>
+
+© 2026 Anime Store | Built by Ashick
+
+</footer>
+
+
+<script>
+
+function addToCart(name,price,img,season,edition,author,volume,selectElement){
+
+let qty = selectElement.value.replace("Qty ","");
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+
+let existing = cart.find(item => item.name===name);
+
+if(existing){
+
+existing.qty += Number(qty);
+
+}
+else{
+
+cart.push({
+
+name:name,
+price:price,
+img:img,
+season:season,
+edition:edition,
+author:author,
+volume:volume,
+qty:Number(qty)
+
+});
+
+}
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+window.location.href="cart.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

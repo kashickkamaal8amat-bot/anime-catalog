@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>About - Anime Dictionary</title>
+  <link rel="icon" href="favicon.png" type="image/x-icon">
+<style>
+body {
+    margin: 0;
+    font-family: 'Times New Roman', serif;
+    background-color: #0f0f1a;
+    color: white;
+}
+
+header {
+    background-color: #141428;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    color: #ff4c8b;
+}
+
+nav {
+    background-color: #1c1c35;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #ff4c8b;
+}
+
+p {
+    text-align: center;
+}
+
+form {
+    background-color: #141428;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 6px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: none;
+}
+
+.gender {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+button {
+    margin-top: 15px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff4c8b;
+    color: white;
+    cursor: pointer;
+}
+
+.reset-btn {
+    background-color: gray;
+}
+footer {
+    background-color: #141428;
+    text-align: center;
+    padding: 10px;
+    margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Anime Dictionary</h1>
+</header>
+
+<nav>
+    <a href="ANIMEDICTIONARY.html">Home</a>
+    <a href="popular anime.html">Popular</a>
+    <a href="genre.html">Genres</a>
+    <a href="about.html">About</a>
+</nav>
+
+<div class="container">
+
+<h2>About Anime Dictionary</h2>
+
+<p>
+Anime Dictionary shares information about popular anime across different genres.
+Sign up to receive updates and recommendations.
+</p>
+
+<form>
+
+<label>Name</label>
+<input type="text" placeholder="Enter your name">
+
+<label>Age</label>
+<input type="number" placeholder="Enter your age">
+
+<label>Gender</label>
+<div class="gender">
+<input type="radio" name="gender"> Male
+<input type="radio" name="gender"> Female
+</div>
+
+<label>Email</label>
+<input type="email" placeholder="Enter your email">
+
+<label>Address</label>
+<textarea rows="3" placeholder="Enter your address"></textarea>
+
+<label>Subscription Plan</label>
+<select>
+<option>Free</option>
+<option>Premium</option>
+<option>Ultimate</option>
+</select>
+
+<button type="submit">Submit</button>
+<button type="reset" class="reset-btn">Reset</button>
+
+</form>
+
+</div>
+
+<footer>
+© 2026 Anime Dictionary| built by mufeeth and micheal
+</footer>
+
+</body>
+</html>
