@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Genres - Anime Dictionary</title>
+  <link rel="icon" href="favicon.png" type="image/x-icon">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Times New Roman', serif;
+    background-color: #0f0f1a;
+    color:white;
+}
+
+header {
+    background-color: #141428;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    color: #ff4c8b;
+}
+
+nav {
+    background-color: #1c1c35;
+    padding: 15px 0;
+    text-align: left;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 25px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.genre-section {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.genre-folder {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 120px;
+    padding: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.genre-folder::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.genre-folder h2 {
+    margin: 0;
+    font-size: 26px;
+    color: #ff4c8b;
+}
+
+.genre-folder span {
+    font-size: 26px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Anime Genres</h1>
+</header>
+
+<nav>
+    <a href="ANIMEDICTIONARY.html">Home</a>
+    <a href="popular anime.html">Popular</a>
+    <a href="genere page.html">Genres</a>
+</nav>
+
+<div class="genre-section">
+
+<a href="action.html" class="genre-folder" 
+style="background-image: url('Action.gif');">
+    <h2>Action</h2>
+    <span>></span>
+</a>
+
+<a href="adventure.html" class="genre-folder" 
+style="background-image: url('adventuure.jpg');">
+    <h2>Adventure</h2>
+    <span>></span>
+</a>
+
+<a href="mystery.html" class="genre-folder" 
+style="background-image: url('mytery.jpg');">
+    <h2>Mystery</h2>
+    <span>></span>
+</a>
+
+<a href="thriller.html" class="genre-folder" 
+style="background-image: url('thriller.jpg');">
+    <h2>Thriller</h2>
+    <span>></span>
+</a>
+
+<a href="fantasy.html" class="genre-folder" 
+style="background-image: url('fantasy.jpg');">
+    <h2>Fantasy</h2>
+    <span>></span>
+</a>
+
+<a href="sports.html" class="genre-folder" 
+style="background-image: url('sports.avif');">
+    <h2>Sports</h2>
+    <span>></span>
+</a>
+
+</div>
+<footer>
+    © 2026 Anime Dictionary | Built by Ashick idealogy from elango
+</footer>
+</body>
+</html>
