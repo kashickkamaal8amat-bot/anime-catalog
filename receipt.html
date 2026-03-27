@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order Receipt - Anime Store</title>
+<link rel="icon" href="favicon.png" type="image/x-icon">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Crimson Text',serif; background:#0f0f1a; color:white; min-height:100vh; }
+  header { background:#141428; padding:20px; text-align:center; }
+  header h1 { margin:0; color:#ff4c8b; font-family:'Cinzel',serif; font-size:28px; letter-spacing:2px; }
+  nav { background:#1c1c35; padding:10px; text-align:center; }
+  nav a { color:white; text-decoration:none; margin:0 15px; font-weight:bold; font-size:16px; }
+  nav a:hover { color:#ff4c8b; }
+
+  .receipt-wrapper { max-width:680px; margin:40px auto; padding:0 20px 60px; }
+
+  .receipt { background:#141428; border:1px solid #2a2a50; border-radius:16px; overflow:hidden; box-shadow:0 0 60px rgba(255,76,139,.15); }
+
+  .receipt-header {
+    background:linear-gradient(135deg,#ff4c8b 0%,#a020f0 100%);
+    padding:28px 30px 22px; text-align:center; position:relative;
+  }
+  .receipt-header::after {
+    content:''; position:absolute; bottom:-12px; left:0; right:0; height:24px; background:#141428;
+    clip-path:polygon(0 100%,2.5% 0,5% 100%,7.5% 0,10% 100%,12.5% 0,15% 100%,17.5% 0,20% 100%,22.5% 0,25% 100%,27.5% 0,30% 100%,32.5% 0,35% 100%,37.5% 0,40% 100%,42.5% 0,45% 100%,47.5% 0,50% 100%,52.5% 0,55% 100%,57.5% 0,60% 100%,62.5% 0,65% 100%,67.5% 0,70% 100%,72.5% 0,75% 100%,77.5% 0,80% 100%,82.5% 0,85% 100%,87.5% 0,90% 100%,92.5% 0,95% 100%,97.5% 0,100% 100%);
+  }
+  .store-name { font-family:'Cinzel',serif; font-size:26px; font-weight:900; color:white; letter-spacing:3px; text-shadow:0 2px 12px rgba(0,0,0,.4); }
+  .store-tagline { font-size:13px; color:rgba(255,255,255,.85); margin-top:4px; letter-spacing:1px; }
+
+  .receipt-body { padding:36px 30px 24px; }
+
+  .order-meta { display:flex; justify-content:space-between; align-items:flex-start; padding-bottom:18px; border-bottom:1px dashed #2a2a50; margin-bottom:24px; flex-wrap:wrap; gap:10px; }
+  .order-meta div { font-size:14px; color:#aaa; line-height:1.8; }
+  .order-meta div span { color:white; font-weight:600; }
+
+  .items-table { width:100%; border-collapse:collapse; margin-bottom:24px; font-size:15px; }
+  .items-table thead tr { border-bottom:1px solid #2a2a50; }
+  .items-table thead th { text-align:left; padding:8px 6px; color:#ff4c8b; font-family:'Cinzel',serif; font-size:12px; letter-spacing:1px; text-transform:uppercase; }
+  .items-table thead th:last-child { text-align:right; }
+  .item-row td { padding:14px 6px; border-bottom:1px dashed #1e1e38; vertical-align:middle; }
+  .item-thumb { width:48px; height:60px; object-fit:cover; border-radius:6px; border:1px solid #2a2a50; display:block; }
+  .item-name { font-weight:600; color:#fff; font-size:15px; }
+  .item-meta { font-size:12px; color:#888; margin-top:2px; }
+  .item-qty { color:#ccc; text-align:center; }
+  .item-price { color:#00ffcc; font-weight:600; }
+  .item-subtotal { color:#00ffcc; font-weight:700; text-align:right; }
+
+  .totals { border-top:1px dashed #2a2a50; padding-top:16px; display:flex; flex-direction:column; align-items:flex-end; gap:8px; margin-bottom:24px; }
+  .total-row { display:flex; justify-content:space-between; width:260px; font-size:15px; color:#bbb; }
+  .total-row span:last-child { color:#fff; }
+  .total-row.grand { font-size:20px; font-family:'Cinzel',serif; font-weight:700; color:white; border-top:1px solid #2a2a50; padding-top:10px; margin-top:4px; }
+  .total-row.grand span:last-child { color:#ff4c8b; }
+
+  .receipt-footer { background:#0f0f1a; border-top:1px dashed #2a2a50; padding:20px 30px; text-align:center; font-size:13px; color:#666; line-height:1.8; }
+  .receipt-footer .thank-you { font-family:'Cinzel',serif; font-size:16px; color:#ff4c8b; margin-bottom:6px; }
+  .barcode { margin:14px auto 0; width:200px; height:36px; background:repeating-linear-gradient(90deg,#333 0px,#333 2px,#222 2px,#222 4px,#333 4px,#333 7px,#222 7px,#222 9px,#333 9px,#333 11px,#222 11px,#222 15px,#333 15px,#333 17px,#222 17px,#222 19px); border-radius:2px; }
+
+  /* Buttons */
+  .btn-row { display:flex; gap:14px; justify-content:center; margin-top:32px; flex-wrap:wrap; }
+  .btn { padding:12px 22px; border:none; border-radius:8px; font-family:'Cinzel',serif; font-size:13px; letter-spacing:1px; cursor:pointer; transition:.25s; text-decoration:none; display:inline-flex; align-items:center; gap:7px; }
+  .btn-print { background:linear-gradient(135deg,#ff4c8b,#a020f0); color:white; }
+  .btn-print:hover { transform:scale(1.05); opacity:.9; }
+  .btn-download { background:#00ffcc; color:#0f0f1a; font-weight:700; }
+  .btn-download:hover { transform:scale(1.05); opacity:.85; }
+  .btn-download.loading { opacity:.6; pointer-events:none; }
+  .btn-shop { background:transparent; color:#ff4c8b; border:1.5px solid #ff4c8b; }
+  .btn-shop:hover { background:#ff4c8b; color:white; transform:scale(1.05); }
+
+  .empty-state { text-align:center; padding:60px 20px; color:#888; }
+  .empty-state .icon { font-size:64px; margin-bottom:16px; }
+  .empty-state h2 { color:#ff4c8b; font-family:'Cinzel',serif; }
+
+  @media print {
+    nav,.btn-row,header,footer { display:none !important; }
+    body { background:white; color:black; }
+    .receipt { box-shadow:none; border:1px solid #ddd; }
+    .receipt-header { background:#ff4c8b !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .receipt-wrapper { margin:0; }
+  }
+</style>
+</head>
+<body>
+
+<header><h1>Anime Dictionary</h1></header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="purchase-manga.html">Shop</a>
+  <a href="cart.html">Cart</a>
+</nav>
+
+<div class="receipt-wrapper">
+  <div id="receipt-content"></div>
+  <div class="btn-row" id="btn-row" style="display:none;">
+    <button class="btn btn-print" onclick="window.print()">🖨️ Print</button>
+    <button class="btn btn-download" id="dl-btn" onclick="downloadReceipt()">⬇️ Download PNG</button>
+    <a class="btn btn-shop" href="purchase-manga.html">Continue Shopping</a>
+  </div>
+</div>
+
+<footer style="background:#141428;text-align:center;padding:10px;color:#555;font-size:13px;">
+  © 2026 Anime Store | Built by Ashick
+</footer>
+
+<script>
+  function generateOrderId() {
+    // Use a stable ID stored in sessionStorage so refreshing the receipt
+    // doesn't generate a brand-new order number each time.
+    let id = sessionStorage.getItem('currentOrderId');
+    if (!id) {
+      id = 'ORD-' + Date.now().toString(36).toUpperCase();
+      sessionStorage.setItem('currentOrderId', id);
+    }
+    return id;
+  }
+
+  function formatDate(d) {
+    return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})
+      + '  ' + d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  }
+
+  // Read cart exclusively from localStorage (set by cart.html before navigating here).
+  // URL-param fallback kept for direct-link / testing scenarios.
+  function getCart() {
+    const params  = new URLSearchParams(window.location.search);
+    const encoded = params.get('cart');
+    if (encoded) {
+      try { return JSON.parse(decodeURIComponent(encoded)); } catch(e) {}
+    }
+    return JSON.parse(localStorage.getItem('cart') || '[]');
+  }
+
+  function render() {
+    const cart      = getCart();
+    const container = document.getElementById('receipt-content');
+    const btnRow    = document.getElementById('btn-row');
+
+    if (!cart.length) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="icon">🛒</div>
+          <h2>Your cart is empty</h2>
+          <p>Add some manga then click "Proceed to Receipt" from the cart page.</p>
+          <a class="btn btn-shop" href="purchase-manga.html" style="margin-top:16px;">Go to Shop</a>
+        </div>`;
+      return;
+    }
+
+    btnRow.style.display = 'flex';
+
+    const subtotal = cart.reduce((s,i) => s + i.price * i.qty, 0);
+    const shipping = subtotal >= 999 ? 0 : 49;
+    const tax      = Math.round(subtotal * 0.18);
+    const grand    = subtotal + shipping + tax;
+    const orderId  = generateOrderId();
+    const now      = new Date();
+
+    const rows = cart.map(item => `
+      <tr class="item-row">
+        <td><img class="item-thumb" src="${item.img}" alt="${item.name}" onerror="this.style.display='none'"></td>
+        <td>
+          <div class="item-name">${item.name}</div>
+          <div class="item-meta">Vol.${item.volume} · ${item.edition} · ${item.season}</div>
+          <div class="item-meta" style="color:#666">by ${item.author}</div>
+        </td>
+        <td class="item-qty">${item.qty}</td>
+        <td class="item-price">₹${item.price}</td>
+        <td class="item-subtotal">₹${item.price * item.qty}</td>
+      </tr>`).join('');
+
+    container.innerHTML = `
+      <div class="receipt" id="the-receipt">
+        <div class="receipt-header">
+          <div class="store-name">ANIME STORE</div>
+          <div class="store-tagline">Your Official Manga Destination</div>
+        </div>
+        <div class="receipt-body">
+          <div class="order-meta">
+            <div>Order ID<br><span>${orderId}</span></div>
+            <div style="text-align:right">Date &amp; Time<br><span>${formatDate(now)}</span></div>
+            <div>Payment<br><span>Online Payment</span></div>
+            <div style="text-align:right">Status<br><span style="color:#7CFC00">✔ Confirmed</span></div>
+          </div>
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th></th><th>Item</th>
+                <th style="text-align:center">Qty</th>
+                <th>Price</th>
+                <th style="text-align:right">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+          <div class="totals">
+            <div class="total-row"><span>Subtotal</span><span>₹${subtotal}</span></div>
+            <div class="total-row"><span>Shipping</span><span>${shipping===0?'<span style="color:#7CFC00">FREE</span>':'₹'+shipping}</span></div>
+            <div class="total-row"><span>GST (18%)</span><span>₹${tax}</span></div>
+            <div class="total-row grand"><span>TOTAL</span><span>₹${grand}</span></div>
+          </div>
+        </div>
+        <div class="receipt-footer">
+          <div class="thank-you">Thank you for your order! 🎌</div>
+          <div>Your manga will be dispatched within 2–4 business days.</div>
+          <div>For support, visit the <strong>About</strong> page.</div>
+          <div class="barcode"></div>
+          <div style="margin-top:8px;font-size:11px;letter-spacing:2px">${orderId}</div>
+        </div>
+      </div>`;
+
+    // Clear cart from localStorage after rendering receipt so a
+    // back-navigate to cart shows it empty (order placed).
+    localStorage.removeItem('cart');
+  }
+
+  /* ── Download as PNG ── */
+  async function downloadReceipt() {
+    const el  = document.getElementById('the-receipt');
+    const btn = document.getElementById('dl-btn');
+    if (!el) return;
+    btn.classList.add('loading');
+    btn.textContent = '⏳ Generating…';
+    try {
+      const canvas = await html2canvas(el, {
+        backgroundColor: '#141428',
+        scale: 2,
+        useCORS: true,
+        logging: false
+      });
+      const link = document.createElement('a');
+      link.download = 'anime-store-receipt.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    } catch(err) {
+      alert('Download failed. Try the Print button instead.');
+      console.error(err);
+    }
+    btn.classList.remove('loading');
+    btn.innerHTML = '⬇️ Download PNG';
+  }
+
+  render();
+</script>
+</body>
+</html>
